@@ -1,6 +1,6 @@
 // Copyright (C) 2019 Meituan
 // All rights reserved
-package com.mybatis.learn.first;
+package com.mybatis.learn.example;
 
 import com.mybatis.learn.po.User;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 // Copyright (C) 2019 Meituan
 // All rights reserved
-package com.mybatis.learn.first;
+package com.mybatis.learn.example;
 
 import com.mybatis.learn.dao.IUserDao;
 import com.mybatis.learn.dao.UserDaoImp;
@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public class Mybatis2OldDao {
     @Test
     public void findById() {
         IUserDao userDao = new UserDaoImp(sqlSessionFactory);
-        User user = userDao.findOneById(1);
+        User user = userDao.findUserById(1);
         Assert.assertNotNull(user);
         Assert.assertEquals(user.getUsername(), "zhangsan");
     }
@@ -43,7 +42,7 @@ public class Mybatis2OldDao {
     @Test
     public void findByName() {
         IUserDao userDao = new UserDaoImp(sqlSessionFactory);
-        List<User> users = userDao.findUsersByName("san");
+        List<User> users = userDao.findUserByName("san");
         Assert.assertNotNull(users);
         Assert.assertEquals(users.size(), 2);
     }

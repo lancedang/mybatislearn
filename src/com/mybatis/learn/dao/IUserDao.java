@@ -5,7 +5,7 @@ import com.mybatis.learn.po.User;
 import java.util.List;
 
 public interface IUserDao {
-    User findOneById(int id);
+    User findUserById(int id);
 
-    List<User> findUsersByName(String name);
+    List<User> findUserByName(String name);
 }

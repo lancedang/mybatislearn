@@ -12,8 +12,9 @@ import java.util.List;
  * @author qiankai07
  * @version 1.0
  * Created on 10/1/19 2:54 PM
- * 原始实现Dao的方式，需要自行编写DaoImpl类，并耦合具体SqlSession相关语句
+ * 该类用于解释：原始实现Dao的方式，需要自行编写DaoImpl类，并耦合具体SqlSession相关语句
  * 本质和MybatisFirst相同，只是由Junit转为Dao
+ * 对比Mapper方式实现Dao层：
  **/
 public class UserDaoImp implements IUserDao {
 
@@ -24,7 +25,7 @@ public class UserDaoImp implements IUserDao {
     }
 
     @Override
-    public User findOneById(int id) {
+    public User findUserById(int id) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         User user = sqlSession.selectOne("test.findUserById", id);
         sqlSession.close();
@@ -32,7 +33,7 @@ public class UserDaoImp implements IUserDao {
     }
 
     @Override
-    public List<User> findUsersByName(String name) {
+    public List<User> findUserByName(String name) {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         List<User> users = sqlSession.selectList("test.findUserByName");
         sqlSession.close();
