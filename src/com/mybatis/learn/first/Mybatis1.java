@@ -1,14 +1,17 @@
 // Copyright (C) 2019 Meituan
 // All rights reserved
-package com.mybatis.learn.po;
+package com.mybatis.learn.first;
 
+import com.mybatis.learn.po.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.*;
-import org.slf4j.LoggerFactory;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,10 +21,14 @@ import java.util.List;
  * @author qiankai07
  * @version 1.0
  * Created on 9/30/19 11:25 AM
+ * SqlMapConfig.xml + User.xml + User实现最原始DB操作
  **/
 @Slf4j
-public class MybatisFirst {
+public class Mybatis1 {
 
+    /**
+     * sqlSession是现场不安全的，建议作为方法体局部变量来初始化，此处我们采用@before注解初始化
+     */
     public static SqlSession sqlSession;
 
     /**
@@ -29,19 +36,37 @@ public class MybatisFirst {
      *
      * @throws IOException
      */
-    @BeforeClass
+    //@BeforeClass
     public static void init() throws IOException {
         String resource = "SqlMapConfig.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         sqlSession = sqlSessionFactory.openSession();
+        log.info("sqlSession hashcode = " + sqlSession.hashCode());
+    }
+
+    @Before
+    public void init2() throws IOException {
+        String resource = "SqlMapConfig.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        sqlSession = sqlSessionFactory.openSession();
+        log.info("sqlSession hashcode = " + sqlSession.hashCode());
     }
 
     /**
-     * 关闭sqlSession,同时将Connection归还到connection pool
+     * 关闭多个Test共享的sqlSession,同时将Connection归还到connection pool
      */
-    @AfterClass
+    //@AfterClass
     public static void clear() {
+        sqlSession.close();
+    }
+
+    /**
+     * 每个Test方法执行完后，清理各自的SQLSession，而非清除多个Test共享的SQLSession
+     */
+    @After
+    public void clear2() {
         sqlSession.close();
     }
 
