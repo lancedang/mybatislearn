@@ -31,5 +31,10 @@
         SELECT * FROM user WHERE username LIKE '%${value}%'
     </select>
 
+    <!--  负责类型POJO作为parameterType查询条件  -->
+    <select id="findUserBySexAndName" parameterType="com.mybatis.learn.po.UserQueryVO"
+            resultType="com.mybatis.learn.po.User">
+        SELECT * FROM  user a WHERE a.sex=#{userCustomer.sex} AND a.username LIKE '%${userCustomer.username}%'
+    </select>
 
 </mapper>

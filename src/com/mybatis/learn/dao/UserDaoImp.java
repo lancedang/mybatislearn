@@ -3,6 +3,7 @@
 package com.mybatis.learn.dao;
 
 import com.mybatis.learn.po.User;
+import com.mybatis.learn.po.UserQueryVO;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -38,5 +39,10 @@ public class UserDaoImp implements IUserDao {
         List<User> users = sqlSession.selectList("test.findUserByName");
         sqlSession.close();
         return users;
+    }
+
+    @Override
+    public List<User> findUserBySexAndName(UserQueryVO userQueryVO) {
+        return null;
     }
 }
