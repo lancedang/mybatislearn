@@ -43,6 +43,13 @@ public class UserDaoImp implements IUserDao {
 
     @Override
     public List<User> findUserBySexAndName(UserQueryVO userQueryVO) {
+        //原始dao方式
+        return null;
+    }
+
+    @Override
+    public List<User> findUserBySexAndNameOpt(UserQueryVO userQueryVO) {
+        //原始dao方式
         return null;
     }
 }

@@ -37,4 +37,23 @@
         SELECT * FROM  user a WHERE a.sex=#{userCustomer.sex} AND a.username LIKE '%${userCustomer.username}%'
     </select>
 
+    <!--where，if细化SQL语句-->
+    <select id="findUserBySexAndNameOpt" parameterType="com.mybatis.learn.po.UserQueryVO"
+            resultType="com.mybatis.learn.po.User">
+        select * from user a
+        <where>
+            <if test="userCustomer!= null">
+
+                <if test="userCustomer.sex!=null and userCustomer.sex!=''">
+                    a.sex=#{userCustomer.sex}
+                </if>
+
+                <if test="userCustomer.username!=null and userCustomer.username!=''">
+                    AND a.username LIKE '%${userCustomer.username}%'
+                </if>
+            </if>
+
+        </where>
+    </select>
+
 </mapper>

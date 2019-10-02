@@ -24,7 +24,7 @@ import java.util.List;
  * @version 1.0
  * Created on 10/2/19 12:29 PM
  **/
-public class Mybatis2PojoParam {
+public class Mybatis3PojoParam {
 
     private SqlSession sqlSession;
 
@@ -40,7 +40,7 @@ public class Mybatis2PojoParam {
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
 
         String sex = String.valueOf(1);
-        String name = "san";
+        String name = "";
 
         UserCustomer userCustomer = new UserCustomer(sex, name);
         UserQueryVO queryVO = new UserQueryVO(userCustomer);
