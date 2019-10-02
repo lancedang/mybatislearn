@@ -52,4 +52,9 @@ public class UserDaoImp implements IUserDao {
         //原始dao方式
         return null;
     }
+
+    @Override
+    public int findUserCountBySexAndName(UserQueryVO userQueryVO) {
+        return 0;
+    }
 }

@@ -37,7 +37,7 @@
         SELECT * FROM  user a WHERE a.sex=#{userCustomer.sex} AND a.username LIKE '%${userCustomer.username}%'
     </select>
 
-    <!--where，if细化SQL语句-->
+    <!--where，if细化SQL语句-demo4-->
     <select id="findUserBySexAndNameOpt" parameterType="com.mybatis.learn.po.UserQueryVO"
             resultType="com.mybatis.learn.po.User">
         select * from user a
@@ -53,6 +53,28 @@
                 </if>
             </if>
 
+        </where>
+    </select>
+
+    <!--  demo5: 抽象出SQL 语句 -->
+    <sql id="queryUserCountBySexAndName">
+        <if test="userCustomer!= null">
+
+            <if test="userCustomer.sex!=null and userCustomer.sex!=''">
+                a.sex=#{userCustomer.sex}
+            </if>
+            <if test="userCustomer.username!=null and userCustomer.username!=''">
+                AND a.username LIKE '%${userCustomer.username}%'
+            </if>
+
+        </if>
+    </sql>
+
+    <select id="findUserCountBySexAndName" parameterType="com.mybatis.learn.po.UserQueryVO" resultType="int">
+        select count(*) from user a
+        <where>
+            <!--引用SQL语句-->
+            <include refid="queryUserCountBySexAndName"/>
         </where>
     </select>
 
