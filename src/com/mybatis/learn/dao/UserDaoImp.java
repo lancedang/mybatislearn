@@ -57,4 +57,9 @@ public class UserDaoImp implements IUserDao {
     public int findUserCountBySexAndName(UserQueryVO userQueryVO) {
         return 0;
     }
+
+    @Override
+    public List<User> findUserForeachIds(UserQueryVO userQueryVO) {
+        return null;
+    }
 }
